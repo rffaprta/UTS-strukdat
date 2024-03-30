@@ -15,8 +15,14 @@ struct Penumpang {
     int harga;
     string jk;
     string kls;
-    Penumpang* next; // Pointer buat penumpang selanjutnya di linked list
+    Penumpang* next; // Pointer penumpang selanjutnya linked list
 };
+
+// Array tujuan
+string namaTujuan[3] = {"Jerman", "Jepang", "Singapura"};
+
+// Array kelas
+string namaKelas[3] = {"Ekonomi", "Bisnis", "First Class"};
 
 // Fungsi data penumpang
 void isidata(Penumpang*& head, int size) {
@@ -50,32 +56,21 @@ void isidata(Penumpang*& head, int size) {
 void Hrg(Penumpang*& head) {
     Penumpang* temp = head;
     while (temp != NULL) {
-        switch (temp->kode) {
-            case 1:
-                temp->harga = 4000000; // Harga tiket Jerman
-                temp->tujuan = "Jerman";
-                break;
-            case 2:
-                temp->harga = 3500000; // Harga tiket Jepang
-                temp->tujuan = "Jepang";
-                break;
-            case 3:
-                temp->harga = 3000000; // Harga tiket Singapura
-                temp->tujuan = "Singapura";
-                break;
-        }
+        temp->harga = 4000000; // Harga tiket default
+
+        // Mendapatkan nama tujuan dari array
+        temp->tujuan = namaTujuan[temp->kode - 1];
+        
+        // Mendapatkan nama kelas dari array
+        temp->kls = namaKelas[temp->kelas - 1];
+        
+        // Mengatur harga berdasarkan kelas
         switch (temp->kelas) {
-            case 1:
-                temp->harga = temp->harga; // Ekonomi
-                temp->kls = "Ekonomi";
-                break;
             case 2:
                 temp->harga = (temp->harga * 125) / 100; // Bisnis
-                temp->kls = "Bisnis";
                 break;
             case 3:
                 temp->harga = (temp->harga * 150) / 100; // First Class
-                temp->kls = "First Class";
                 break;
         }
         temp = temp->next;
@@ -109,8 +104,8 @@ int main() {
 
         cout << "Kode Tujuan " << "   Tujuan   " << " Harga Tiket   " << "         Kelas        " << endl;
         cout << "    1       " << "    Jerman  " << " Rp. 4.000.000 " << " 1.Ekonomi (+0%)      " << endl;
-        cout << "    2       " << "    Jepang  " << " Rp. 3.500.000 " << " 2.Bisnis (+25%)                    " << endl;
-        cout << "    3       " << "  Singapura " << " Rp. 3.000.000 " << " 2.First Class (+50%)    " << endl;
+        cout << "    2       " << "    Jepang  " << " Rp. 3.500.000 " << " 2.Bisnis (+25%)      " << endl;
+        cout << "    3       " << "  Singapura " << " Rp. 3.000.000 " << " 2.First Class (+50%) " << endl;
 
         cout << endl;
 
